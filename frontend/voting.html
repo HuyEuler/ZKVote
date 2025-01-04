@@ -23,8 +23,10 @@
       </label>
       <br><br>
       <button type="submit">Vote</button>
+      
   </form>
     
+  <button onclick="showResult()">Show result</button>
 
   <div class="results" id="results">
       <!-- Results will be displayed here -->
@@ -59,10 +61,12 @@
             });
 
             const result = await response.json();
+            console.log(result);
 
             if (result.success) {
                 // Hiển thị kết quả bầu cử
-                displayResults(result.votingResults);
+                
+                displayResults(result.voteFor0, result.voteFor1);
                 alert('Vote successful!');
             } else {
                 alert(`Vote failed: ${result.message}`);
@@ -73,12 +77,22 @@
         }
     });
 
-    // Hàm hiển thị kết quả bầu cử
-    function displayResults(votingResults) {
-        resultsDiv.innerHTML = '<h3>Current Voting Results:</h3>';
-        for (const option in votingResults) {
-            resultsDiv.innerHTML += `<p>${option}: ${votingResults[option]} votes</p>`;
+    async function showResult(){
+        console.log("Show result");
+        try {
+            const result =  await fetch(`http://localhost:3000/getResult`).then(res => res.json());
+            console.log(result);
+            displayResults(result.voteFor0, result.voteFor1);
+        } catch (error) {
+            console.error('Error during voting:', error);
+            alert('An error occurred while voting.');
         }
+    }
+
+    // Hàm hiển thị kết quả bầu cử
+    function displayResults(voteFor0, voteFor1) {
+        resultsDiv.innerHTML = '<h3>Current Voting Results:</h3>';
+        resultsDiv.innerHTML += `<p> Donald Trump : ${voteFor0}, Kamala Harris: ${voteFor1} </p>`
     }
   </script>
 

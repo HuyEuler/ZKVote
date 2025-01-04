@@ -6,13 +6,13 @@ async function register() {
     const password = document.getElementById('reg-password').value;
     const name = document.getElementById('reg-name').value;
 
-    const hashPassword = password;
+    // const hashPassword = password;
 
-    // Gửi thông tin lên server
+    
     const response = await fetch('http://localhost:3000/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, name, hashPassword})
+        body: JSON.stringify({ username, name, password})
     });
 
     const result = await response.json();
