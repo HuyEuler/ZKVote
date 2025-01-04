@@ -3,19 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="https://www.polyhedra.network/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fzkj.02913bee.png&w=64&q=100">
     <title>ZKP Auth</title>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh; /* Chiều cao toàn màn hình */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: black;
+        overflow: hidden;
+        font-family: 'Courier New', monospace;
+        color: white;
+      }
+
+      /* Background image */
+      body::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('https://elizawakesup.ai/eliza-eyes-closed.jpeg'), 
+                          linear-gradient(to bottom, rgba(0, 0, 50, 0.8), rgba(0, 0, 0, 0.9));
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        filter: brightness(0.4); /* Làm tối hình ảnh */
+        z-index: -1; /* Đẩy nền xuống dưới nội dung */
+      }
+
+      /* Nội dung */
+      .content {
+        text-align: center;
+        z-index: 1;
+      }
+
+      .content h1 {
+        font-size: 6rem;
+        color: #00ff00b6; /* Màu xanh lục neon cho chữ */
+        margin: 0;
+      }
+
+      .content h2 {
+        font-size: 2rem;
+        color: #00ff00b6;
+        margin-top: 10px;
+      }
+
+      /* Form đăng nhập */
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px; /* Khoảng cách giữa các input */
+        z-index: 1;
+      }
+
+      form input {
+        padding: 10px;
+        font-size: 1rem;
+        width: 250px;
+        border: 2px solid #00ff00b6;
+        border-radius: 5px;
+        background-color: transparent;
+        color: white;
+        transition: all 0.3s ease;
+      }
+
+form button {
+        cursor: pointer;
+        padding: 10px;
+        font-size: 1rem;
+        width: 150px;
+        border: 2px solid #00ff00b6;
+        border-radius: 5px;
+        background-color: transparent;
+        color: white;
+        transition: all 0.3s ease;
+      }
+
+    form button:hover {
+  background-color: #00cc00;
+  color: white;
+  transform: scale(1.05);
+  /* Hiệu ứng ánh sáng lan quanh button */
+  box-shadow: 
+    0 0 0 0 rgba(0, 255, 0, 0.5),
+    0 0 10px 5px rgba(0, 255, 0, 0.5),
+    0 0 20px 10px rgba(0, 255, 0, 0.3),
+    0 0 30px 15px rgba(0, 255, 0, 0.2);
+}
+
+      form input:hover {
+        border-color: #00cc00;
+        transform: scale(1.05); /* Phóng to input một chút khi hover */
+      }
+
+      /* Liên kết tạo tài khoản mới */
+      a {
+        color: #00ff00b6;
+        text-decoration: none;
+        margin-top: 20px;
+        font-size: 1.2rem;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
     <script src="https://unpkg.com/snarkjs"></script>
     <script src="node_modules/snarkjs/main.js"></script>
 </head>
 <body>
-    
-    <div id="login">
-        <h2>Login</h2>
+    <div class="content">
+      <h1>PKJ</h1>
+      <h2>Login</h2>
+    </div>
+    <form id="login">
         <input type="text" id="login-username" placeholder="Username">
         <input type="password" id="login-password" placeholder="Password">
         <button onclick="login()">Login</button>
-    </div>
+    </form>
     
+    <a href="register.html">Don't have an account? Sign up here</a>
 
     <script src="script.js"></script>
 </body>
