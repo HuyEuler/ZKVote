@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZKVote</title>
+</head>
+<body>
+    
+  <h1>Vote for Your Option</h1>
+
+  <div id="welcome" style="display:none;">
+      <h2 id="welcome-message"></h2>
+  </div>
+
+  <form id="vote-form">
+      <label>
+          <input type="radio" name="option" value="0" required> Donald Trump
+      </label>
+      <br>
+      <label>
+          <input type="radio" name="option" value="1" required> Kamala Harris
+      </label>
+      <br><br>
+      <button type="submit">Vote</button>
+  </form>
+    
+
+  <div class="results" id="results">
+      <!-- Results will be displayed here -->
+  </div>
+
+
+  <script>
+      const message = localStorage.getItem('welcomeMessage');
+      const username = localStorage.getItem('username');
+      const password = localStorage.getItem('password');
+      if (message) {
+          document.getElementById('welcome-message').innerText = message; 
+          document.getElementById('welcome').style.display = 'block'; 
+      } else {
+          document.getElementById('welcome').style.display = 'none';
+      }
+
+    const voteForm = document.getElementById('vote-form');
+    const resultsDiv = document.getElementById('results');
+
+    voteForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        // Lấy lựa chọn cử tri
+        const selectedOption = document.querySelector('input[name="option"]:checked').value;
+        // console.log(selectedOption + username + password);
+        try {
+            const response = await fetch('http://localhost:3000/vote', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ vote: selectedOption, username: username, password: password}),
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                // Hiển thị kết quả bầu cử
+                displayResults(result.votingResults);
+                alert('Vote successful!');
+            } else {
+                alert(`Vote failed: ${result.message}`);
+            }
+        } catch (error) {
+            console.error('Error during voting:', error);
+            alert('An error occurred while voting.');
+        }
+    });
+
+    // Hàm hiển thị kết quả bầu cử
+    function displayResults(votingResults) {
+        resultsDiv.innerHTML = '<h3>Current Voting Results:</h3>';
+        for (const option in votingResults) {
+            resultsDiv.innerHTML += `<p>${option}: ${votingResults[option]} votes</p>`;
+        }
+    }
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>

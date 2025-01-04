@@ -1,0 +1,22 @@
+{
+  "huy1": {
+    "name": "huy 1",
+    "hashPassword": "15e57b5244f1786e69d887cf6ebc5e2b25f3fc0b7520583029bc377982a66536",
+    "counter": 6
+  },
+  "huy2": {
+    "name": "Lê Đức Huy",
+    "hashPassword": "96f56a93ef8bcf4f5efc79d0967649f93d08eff0af7dca5a4f9aa8db1a434b6",
+    "counter": 1
+  },
+  "huy3": {
+    "name": "Lê Đức Huy",
+    "hashPassword": "fef03da181aeb4b96e831a346183d1b6926777913db17f659caeec3b8b2cf99",
+    "counter": 5
+  },
+  "huy7": {
+    "name": "Huy 7",
+    "hashPassword": "27ad43cf6415556989fa626bbea0ad4856e5702e493bd6e2e28af8741fce31d",
+    "counter": 6
+  }
+}
