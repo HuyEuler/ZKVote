@@ -2,6 +2,7 @@
 // import * as circomlibjs from 'circomlibjs';
 
 async function register() {
+    event.preventDefault();
     const username = document.getElementById('reg-username').value;
     const password = document.getElementById('reg-password').value;
     const name = document.getElementById('reg-name').value;
@@ -14,14 +15,15 @@ async function register() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, name, password})
     });
-
+    console.log("So dumb");
     const result = await response.json();
     alert(result.message);
 
-    window.location.href = 'http://127.0.0.1:5500/frontend/login';
+    window.location.href = './login';
 }
 
 async function login() {
+    event.preventDefault();
     const username = document.getElementById('login-username').value;
     const password = document.getElementById('login-password').value;
 

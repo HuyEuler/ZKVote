@@ -17,6 +17,51 @@
   "huy5": {
     "name": "huy1234",
     "hashPassword": "1f9e6ce9eb8f94e09d85c4643d84a07e7396737d2275553c5b20ab5970d8c9d",
+    "counter": 2
+  },
+  "huy 6": {
+    "name": "Huy 6",
+    "hashPassword": "1dd07ca0b9bb9129ef50f5224459921d4ccef556f6a1727faee26fddfae07ebd",
+    "counter": 0
+  },
+  "huy7": {
+    "name": "Lê Đức Huy",
+    "hashPassword": "1c192fd45b0a915167d30916457523f051033739e8bd973befa452f6c1f0e1de",
+    "counter": 2
+  },
+  "a": {
+    "name": "c",
+    "hashPassword": "46057e5bf9cc266b10a3ebb901424f2acd84f77cc73e2cc1fbf0d7561c94179",
+    "counter": 0
+  },
+  "huy8": {
+    "name": "Huy 8",
+    "hashPassword": "29f42b07b93cccd286d8fc26cbb3c875698c1980d78d7f831856999d822e8ab6",
+    "counter": 0
+  },
+  "huy9 ": {
+    "name": "Huy 9",
+    "hashPassword": "29f42b07b93cccd286d8fc26cbb3c875698c1980d78d7f831856999d822e8ab6",
+    "counter": 1
+  },
+  "huy9": {
+    "name": "Huy 9",
+    "hashPassword": "2c79e76375357671e8f0e97fdc5f0e638189b0c045993b841df436d2da07d3e0",
+    "counter": 1
+  },
+  "huy10": {
+    "name": "Le Duc Huy",
+    "hashPassword": "271d4c11bd19e52c55a6825fd6d70773c1467824ccbd462d65766d93f54d4fdd",
+    "counter": 3
+  },
+  "huy11": {
+    "name": "Le Duc Huy ",
+    "hashPassword": "297ee666f54d17670d635c7d39a887897bd05dfbc4c14a4375a710497c607883",
+    "counter": 2
+  },
+  "huy12": {
+    "name": "Huy 12",
+    "hashPassword": "2bdf757df5dcbbd7529e15b9c00ae78295efe12b731056e293a9aa994c5e90e6",
     "counter": 1
   }
 }
