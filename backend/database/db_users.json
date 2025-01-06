@@ -1,22 +1,22 @@
 {
   "huy1": {
-    "name": "huy 1",
-    "hashPassword": "299dfc0d9ae6b7f2fd2b1da548431b14aefe5c24503d4052b2daa1ec16b69822",
-    "counter": 4
+    "name": "Huy 1",
+    "hashPassword": "bd2b491399c52fb28068d400ce188a29ccab855056428f073d68393dbd7aa84",
+    "counter": 0
   },
   "huy2": {
-    "name": "huy2",
+    "name": "Huy 2",
     "hashPassword": "19db3690ce5bf9cc3c85d2971843a2633f4daf0053e1cd912bed3f686ddead8",
-    "counter": 2
+    "counter": 3
   },
   "huy3": {
     "name": "Huy 3",
     "hashPassword": "afb6fdb6fae732f642d43713292d304ffd5cfec9af4c10d762c3853218c894f",
-    "counter": 1
+    "counter": 2
   },
-  "huy4": {
-    "name": "Huy 4",
-    "hashPassword": "305419cc234a578ca5c72f71c5ab6041e44d006afd70b6d757f9313b5f2862be",
-    "counter": 1
+  "huy5": {
+    "name": "Huy 5",
+    "hashPassword": "1a5b3a217a1a1d6c3e355c140c4eb5d05414788a30b6a47fcd0881bdfa19431b",
+    "counter": 3
   }
 }
