@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check Library Installation</title>
+  <script src="bundle.js"></script> <!-- Chèn bundle.js đã tạo bằng browserify -->
+  <script>
+    // Hàm kiểm tra tích hợp thư viện
+    function checkLibraries() {
+      try {
+        // Kiểm tra snarkjs
+        if (window.groth16 && typeof window.groth16.fullProve === 'function') {
+          console.log("snarkjs đã được cài đặt thành công!");
+        } else {
+          console.error("snarkjs không được cài đặt đúng cách.");
+        }
+
+        // Kiểm tra circomlibjs
+        if (window.circomlib && typeof window.circomlib.buildPedersenHash === 'function') {
+          console.log("circomlibjs đã được cài đặt thành công!");
+        } else {
+          console.error("circomlibjs không được cài đặt đúng cách.");
+        }
+      } catch (error) {
+        console.error("Có lỗi xảy ra khi kiểm tra thư viện:", error);
+      }
+    }
+
+    // Chạy hàm kiểm tra sau khi DOM sẵn sàng
+    document.addEventListener('DOMContentLoaded', checkLibraries);
+  </script>
+</head>
+<body>
+  <h1>Check Library Installation</h1>
+  <p>Mở console của trình duyệt (F12) để xem kết quả kiểm tra.</p>
+</body>
+</html>

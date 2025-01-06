@@ -36,17 +36,17 @@ const dbVoteResult = readDatabase(dbVoteResultPath);
 
 // Đăng ký người dùng
 app.post('/register', async (req, res) => {
-    const { username, name, password } = req.body;
+    const { username, name, hashPassword, hashUnamePass } = req.body;
 
     if (dbUsers[username]) {
         return res.status(400).json({ message: 'Username already exists!' });
     }
 
-    // *** FRONTEND
-    const hashPassword = await hash1(password);
-    const hashUnamePass = await hash2(username, password)
-    const voter = await BigInt("0x" + hashUnamePass); // hash username and password
-    //////
+    const voter = BigInt("0x" + hashUnamePass); // hash username and password
+    // // *** FRONTEND
+    // const hashPassword = await hash1(password);
+    // const hashUnamePass = await hash2(username, password)
+    // //////
 
     dbUsers[username] = { name, hashPassword, counter: 0 };
     saveDatabase(dbUserPath, dbUsers);
@@ -59,7 +59,10 @@ app.post('/register', async (req, res) => {
 
 // Đăng nhập và xác thực bằng ZKP
 app.post('/login', async (req, res) => {
-    const { username, password} = req.body;
+    const { username, publicSignals, proof} = req.body;
+    console.log(username);
+    console.log(publicSignals);
+    console.log(proof);
 
     if (!dbUsers[username]) {
         return res.status(404).json({ message: 'User not found!' });
@@ -68,32 +71,30 @@ app.post('/login', async (req, res) => {
     const user = dbUsers[username];
 
     // *** FRONTEND
-    const hashPassword = await hash1(password);
-    const {proof, publicSignals} = await generateProofLogin(password, hashPassword);
+    // const hashPassword = await hash1(password);
+    // const {proof, publicSignals} = await generateProofLogin(password, hashPassword);
     /////
+    
     const verificationKey = JSON.parse(fs.readFileSync(path.join(__dirname, '../circom/build/login/verification_key.json')));
     const isValid = await snarkjs.groth16.verify(verificationKey, publicSignals, proof);
     const hashServerBigInt = BigInt("0x" + user.hashPassword);
     const authen = (publicSignals[0] == hashServerBigInt);
-    // console.log(isValid + " " + authen);
+    console.log(isValid + " " + authen);
 
     if (isValid && authen) {
         user.counter += 1;
         saveDatabase(dbUserPath, dbUsers); 
-        res.json({ message: `Hello ${user.name}`, success: true, username: username, password:password });
+        res.json({ message: `Hello ${user.name}`, success: true});
     } else {
         res.status(401).json({ message: 'Nhập sai mật khẩu' });
     }
 });
 
 app.post('/vote', async (req, res) => {
-    // *** FRONTEND
-    const {username, password, vote } = req.body;
-    const {proof, publicSignals} = await generateProofElect(username, password, vote);
-    console.log("elect");
-    console.log(publicSignals);
-
-    ///////
+    const {username, vote, proof, publicSignals } = req.body;
+    // // *** FRONTEND
+    // const {proof, publicSignals} = await generateProofElect(username, password, vote);
+    // ///////
 
     const verificationKey = JSON.parse(fs.readFileSync(path.join(__dirname, '../circom/build/elect/verification_key.json')));
     const isValid = await snarkjs.groth16.verify(verificationKey, publicSignals, proof);
@@ -167,6 +168,8 @@ async function generateProofLogin(password, hashPassword) {
     const { proof, publicSignals } = await snarkjs.groth16.fullProve({ password:passwordBigInt, hash_server: hashPasswordBigInt}, 
         path.join(__dirname, '../circom/build/login/login_js/login.wasm'), 
         path.join(__dirname, '../circom/build/login/login_0001.zkey'));
+    // console.log(publicSignals);
+    // console.log(proof);
     return { proof, publicSignals };
 }
 
@@ -203,11 +206,11 @@ async function generateProofElect(username, password, voteChoice) {
 
 app.listen(3000, () => console.log('Server running on http://localhost:3000'));
 
-// generateProofLogin(1, hash(1));
-// console.log("Hello");
-// generateProofElect('123', '456', '0');
 
-// hash2('123', '456');
 
-// const string = "uasn";
-// console.log(parseInt(string, 36));
+// async function fun() {
+//     const hashRes = await hash1(1);
+//     generateProofLogin(1, hashRes);
+// }
+// fun();
+

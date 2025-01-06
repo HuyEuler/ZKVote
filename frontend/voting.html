@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="bundle.js"></script>
   <title>ZKVote</title>
 </head>
 <body>
@@ -23,16 +24,17 @@
       </label>
       <br><br>
       <button type="submit">Vote</button>
-      
   </form>
     
   <button onclick="showResult()">Show result</button>
+  <br>
+  <button onclick="logOut()">Log out</button>
 
   <div class="results" id="results">
       <!-- Results will be displayed here -->
   </div>
 
-
+  <script src="script.js"></script>
   <script>
     //   event.preventDefault();
       const message = localStorage.getItem('welcomeMessage');
@@ -50,15 +52,22 @@
 
     voteForm.addEventListener('submit', async (event) => {
         event.preventDefault();
-
+        
         // Lấy lựa chọn cử tri
-        const selectedOption = document.querySelector('input[name="option"]:checked').value;
+        const vote = document.querySelector('input[name="option"]:checked').value;
+        const {proof, publicSignals} = await generateProofElect(username, password, vote);
+        const jsonData = JSON.stringify({
+            username,
+            vote,
+            proof: proof,
+            publicSignals: publicSignals
+        });
         // console.log(selectedOption + username + password);
         try {
             const response = await fetch('http://localhost:3000/vote', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ vote: selectedOption, username: username, password: password}),
+                body: jsonData,
             });
 
             const result = await response.json();
@@ -94,6 +103,11 @@
     function displayResults(voteFor0, voteFor1) {
         resultsDiv.innerHTML = '<h3>Current Voting Results:</h3>';
         resultsDiv.innerHTML += `<p> Donald Trump : ${voteFor0}, Kamala Harris: ${voteFor1} </p>`
+    }
+
+    function logOut(){
+        event.preventDefault();
+        window.location.href = './login';
     }
   </script>
 
